@@ -22,8 +22,21 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Debug environment
+        run: |
+          echo "Node version: $(node --version)"
+          echo "npm version: $(npm --version)"
+          echo "Build directory exists: $(ls -la)"
+          echo "Environment variables check:"
+          echo "REACT_APP_FIREBASE_PROJECT_ID is set: ${{ secrets.REACT_APP_FIREBASE_PROJECT_ID != '' }}"
       - name: Build
-        run: pnpm run build
+        run: |
+          echo "Starting build process..."
+          CI=false pnpm run build
+          echo "Build completed. Checking build directory..."
+          ls -la build/
+          echo "Checking if index.html exists in build:"
+          cat build/index.html | head -10
         env:
           REACT_APP_RECIPIENT_EMAIL: ${{ secrets.REACT_APP_RECIPIENT_EMAIL }}
           REACT_APP_FIREBASE_API_KEY: ${{ secrets.REACT_APP_FIREBASE_API_KEY }}

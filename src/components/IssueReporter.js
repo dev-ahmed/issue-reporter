@@ -187,17 +187,17 @@ const IssueReporter = () => {
   }, [fields.length]);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-gray-50 py-4 sm:py-8 px-4">
       <div className="max-w-2xl mx-auto">
-        <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-8">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+        <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-4 sm:p-8">
+          <div className="mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
               Issue Reporter
             </h1>
             <p className="text-gray-600">Break down the issue into steps</p>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
             <div>
               <label
                 htmlFor="issueTitle"
@@ -216,7 +216,7 @@ const IssueReporter = () => {
                   },
                 })}
                 placeholder="Brief description of the issue..."
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                className={`w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
                   errors.issueTitle ? 'border-red-300' : 'border-gray-300'
                 }`}
                 disabled={isSubmitting}
@@ -246,7 +246,7 @@ const IssueReporter = () => {
                   },
                 })}
                 placeholder="your.email@example.com"
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                className={`w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
                   errors.senderEmail ? 'border-red-300' : 'border-gray-300'
                 }`}
                 disabled={isSubmitting}
@@ -258,30 +258,32 @@ const IssueReporter = () => {
               )}
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {fields.map((field, index) => (
-                <div key={field.id} className="flex items-center gap-4 group">
-                  <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-medium">
-                    {index + 1}
-                  </div>
+                <div key={field.id} className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 group">
+                  <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto">
+                    <div className="flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs sm:text-sm font-medium">
+                      {index + 1}
+                    </div>
 
-                  <input
-                    ref={(el) => (stepRefs.current[index] = el)}
-                    type="text"
-                    {...register(`steps.${index}.value`)}
-                    onKeyDown={(e) => handleKeyPress(e, index)}
-                    placeholder={
-                      stepPlaceholders[index] || `Step ${index + 1}...`
-                    }
-                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-                    disabled={isSubmitting}
-                  />
+                    <input
+                      ref={(el) => (stepRefs.current[index] = el)}
+                      type="text"
+                      {...register(`steps.${index}.value`)}
+                      onKeyDown={(e) => handleKeyPress(e, index)}
+                      placeholder={
+                        stepPlaceholders[index] || `Step ${index + 1}...`
+                      }
+                      className="flex-1 px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                      disabled={isSubmitting}
+                    />
+                  </div>
 
                   <button
                     type="button"
                     onClick={addStep}
                     disabled={isSubmitting}
-                    className="flex-shrink-0 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full sm:w-auto sm:flex-shrink-0 px-3 sm:px-4 py-2 text-sm sm:text-base bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     + Step (expect)
                   </button>
@@ -301,7 +303,7 @@ const IssueReporter = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full px-6 py-4 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? (
                 <span className="flex items-center justify-center">
@@ -338,11 +340,11 @@ const IssueReporter = () => {
       {/* Email Modal */}
       {showEmailModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 p-4 sm:p-6">
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">
               Enter Recipient Email
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className="text-sm sm:text-base text-gray-600 mb-4">
               Please enter the email address where you'd like to send this issue
               report.
             </p>
@@ -351,10 +353,10 @@ const IssueReporter = () => {
               value={recipientEmail}
               onChange={(e) => setRecipientEmail(e.target.value)}
               placeholder="recipient@example.com"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors mb-4"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors mb-4"
               autoFocus
             />
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <button
                 type="button"
                 onClick={() => {
@@ -362,7 +364,7 @@ const IssueReporter = () => {
                   setRecipientEmail('');
                   setPendingFormData(null);
                 }}
-                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
+                className="w-full sm:flex-1 px-4 py-2 text-sm sm:text-base border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
               >
                 Cancel
               </button>
@@ -370,7 +372,7 @@ const IssueReporter = () => {
                 type="button"
                 onClick={handleEmailModalSubmit}
                 disabled={!recipientEmail.trim() || isSubmitting}
-                className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full sm:flex-1 px-4 py-2 text-sm sm:text-base bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? 'Submitting...' : 'Submit'}
               </button>
