@@ -4,6 +4,7 @@
   "description": "A React app for reporting issues with step-by-step breakdown",
   "private": true,
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "firebase": "^12.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
